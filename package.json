@@ -4,7 +4,8 @@
   "description": "Todo application with task priority",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:eslint": "eslint --ext tsx,ts,js,ts,json . --ignore-path .gitignore"
   },
   "repository": {
     "type": "git",
