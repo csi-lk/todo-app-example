@@ -1,4 +1,5 @@
-import { resolve } from "path"
+/* eslint-disable import/no-extraneous-dependencies */
+import path from "path"
 import { CheckerPlugin } from "awesome-typescript-loader"
 import HtmlWebpackPlugin from "html-webpack-plugin"
 
@@ -9,7 +10,7 @@ const commonConfig = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
-  context: resolve(__dirname, "./src"),
+  context: path.resolve(__dirname, "./src"),
   module: {
     rules: [
       {
@@ -32,7 +33,7 @@ const commonConfig = {
   },
 }
 
-const devConfig = merge(commonConfig, {
+const developmentConfig = merge(commonConfig, {
   mode: "development",
   entry: [
     "react-hot-loader/patch", // activate HMR for React
@@ -49,4 +50,4 @@ const devConfig = merge(commonConfig, {
   ],
 })
 
-module.exports = devConfig
+module.exports = developmentConfig

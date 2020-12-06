@@ -1,8 +1,8 @@
-import * as React from "react"
+import React from "react"
 import { render } from "react-dom"
 
-const rootEl = document.getElementById("pwc-todo-app")
+const rootElement = document.querySelector("#pwc-todo-app")
 
-const App = () => <div>test</div>
+const App = (): React.ReactElement => <div>test</div>
 
-render(<App />, rootEl)
+render(<App />, rootElement)
