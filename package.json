@@ -1,0 +1,24 @@
+{
+  "name": "pwc-todo-app",
+  "version": "1.0.0",
+  "description": "Todo application with task priority",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csi-lk/pwc-todo-app.git"
+  },
+  "keywords": [
+    "PWC",
+    "TODO",
+    "app"
+  ],
+  "author": "Callum Silcock <code@csi.lk> (https://csi.lk)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/csi-lk/pwc-todo-app/issues"
+  },
+  "homepage": "https://github.com/csi-lk/pwc-todo-app#readme"
+}
