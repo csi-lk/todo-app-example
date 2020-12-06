@@ -26,6 +26,8 @@
   "homepage": "https://github.com/csi-lk/pwc-todo-app#readme",
   "devDependencies": {
     "@types/jest": "^26.0.16",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "@types/webpack-merge": "^4.1.5",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
