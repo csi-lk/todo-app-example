@@ -11,7 +11,7 @@ type StoreAction =
       type: TODO_ACTIONS.UPDATE_TODO_TEXT
       payload: { id: TODO_ID; todoText: string }
     }
-  | { type: TODO_ACTIONS.COMPLETE_TODO; payload: { id: TODO_ID } }
+  | { type: TODO_ACTIONS.TOGGLE_TODO_COMPLETION; payload: { id: TODO_ID } }
 
 const todoReducer = (state: TODO_STATE, action: StoreAction): TODO_STATE => {
   switch (action.type) {
@@ -33,7 +33,6 @@ const todoReducer = (state: TODO_STATE, action: StoreAction): TODO_STATE => {
           [nanoid()]: {
             priority: "medium",
             todoText: lang.newTodo,
-            isCompleted: false,
           },
         },
       }
@@ -48,6 +47,34 @@ const todoReducer = (state: TODO_STATE, action: StoreAction): TODO_STATE => {
           },
         },
       }
+    case TODO_ACTIONS.TOGGLE_TODO_COMPLETION: {
+      if (state.todoItems[action.payload.id]) {
+        const newTodoItems = { ...state.todoItems }
+        delete newTodoItems[action.payload.id]
+        return {
+          ...state,
+          completedItems: {
+            ...state.completedItems,
+            [action.payload.id]: {
+              ...state.todoItems[action.payload.id],
+            },
+          },
+          todoItems: newTodoItems,
+        }
+      }
+      const newTodoItems = { ...state.completedItems }
+      delete newTodoItems[action.payload.id]
+      return {
+        ...state,
+        todoItems: {
+          ...state.todoItems,
+          [action.payload.id]: {
+            ...state.completedItems[action.payload.id],
+          },
+        },
+        completedItems: newTodoItems,
+      }
+    }
     default:
       return {
         ...state,
