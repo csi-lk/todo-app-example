@@ -2,6 +2,14 @@
 
 Todo app for web coding challenge
 
+## Starting
+
+install all deps with `yarn`
+
+Then run
+
+`yarn start`
+
 ## Dev Notes
 
 Using nano id for uuid as it's much faster for the tradeoff of a few conflicts (that most likely are not going to occur)
