@@ -22,5 +22,5 @@ export const getOpenTodoIdsSorted = (state: TODO_STATE): TODO_ID[] =>
           return firstItem.localeCompare(secondItem)
         return secondItem.localeCompare(firstItem)
       }),
-    [state.todoItems, state.sortBy]
+    [state.todoItems, state.sortBy, state.sortDirection]
   )

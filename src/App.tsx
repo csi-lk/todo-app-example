@@ -27,6 +27,12 @@ const App = (): React.ReactElement => {
             payload: { sortBy: sortGloballyBy },
           })
         }
+        setSortDirection={(sortDirectionGlobally): void =>
+          dispatch({
+            type: TODO_ACTIONS.SET_SORT_DIRECTION,
+            payload: { sortDirection: sortDirectionGlobally },
+          })
+        }
       />
       {getOpenTodoIdsSorted(state).map((id) => (
         <Task
