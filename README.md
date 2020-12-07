@@ -1,6 +1,6 @@
-# pwc-todo-app
+# Todo App Example
 
-Todo app for PWC's web coding challenge
+Todo app for web coding challenge
 
 ## Dev Notes
 

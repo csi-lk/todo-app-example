@@ -8,7 +8,7 @@ export type TODO_STATE = {
 }
 
 export const initialState = {
-  sortBy: "todoText",
+  sortBy: "priority",
   sortDirection: "decending",
   todoItems: {
     V1StGXR8Z5jdHi6BmyT: {

@@ -1,6 +1,6 @@
 import React from "react"
 
-import { TODO } from "../../lib/constants"
+import { lang, TODO } from "../../lib/constants"
 
 import styles from "./sort.css"
 
@@ -16,9 +16,10 @@ const Sort = ({
   setSortDirection: (sortGlobalDirection: "ascending" | "decending") => void
 }): React.ReactElement => (
   <div className={styles.sort}>
-    <label htmlFor="sort-todos">Sort by:</label>
+    <label htmlFor="sort-todos">{lang.sortBy}</label>
     <select
       id="sort-todos"
+      data-testid="sort-todos-by"
       value={sortBy}
       onChange={(event): void => {
         // NOTE: I don't know of a better way to do this...
@@ -30,6 +31,7 @@ const Sort = ({
       <option value="todoText">Text</option>
     </select>
     <select
+      data-testid="sort-todos-direction"
       value={sortDirection}
       onChange={(event): void => {
         // NOTE: I don't know of a better way to do this...

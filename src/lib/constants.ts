@@ -21,4 +21,6 @@ export const lang = {
   completedTasks: "Completed Tasks",
   openTasks: "Open Tasks",
   total: "Total",
+  sortBy: "Sort By:",
+  sortDirection: "Sort direction:",
 }

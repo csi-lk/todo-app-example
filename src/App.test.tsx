@@ -1,18 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import "@testing-library/jest-dom"
-import { render, fireEvent } from "@testing-library/react"
+import { render, fireEvent, within } from "@testing-library/react"
 import React from "react"
-import { initialState } from "./state/todo-state"
 import { lang } from "./lib/constants"
 
 import App from "./App"
 
 describe("TodoApp", () => {
   it("renders with default todo", async () => {
-    const { getByTestId } = render(<App />)
-    expect(
-      getByTestId(Object.keys(initialState.todoItems)[0])
-    ).toBeInTheDocument()
+    const { getByLabelText } = render(<App />)
+    expect(getByLabelText(lang.todoInputLabel)).toBeInTheDocument()
   })
   it("renders new todo field when pressing enter", async () => {
     const { getByLabelText, getAllByLabelText } = render(<App />)
@@ -29,16 +26,19 @@ describe("TodoApp", () => {
     const { getByLabelText } = render(<App />)
     const input = getByLabelText(lang.todoInputLabel, { selector: "input" })
     fireEvent.change(input, { target: { value: "a" } })
-    expect(input.value).toBe("a")
+    expect(input).toHaveValue("a")
   })
 
   describe("completion", () => {
     it("allows user to complete todo", async () => {
-      const { getAllByLabelText, queryByLabelText } = render(<App />)
-      const input = getAllByLabelText(lang.checkboxInputLabel, {
+      const { getByTestId, queryByLabelText } = render(<App />)
+
+      const { getByLabelText } = within(getByTestId("new-todos"))
+      const input = getByLabelText(lang.checkboxInputLabel, {
         selector: "input",
-      })[0]
-      expect(input.checked).toBe(false)
+      })
+
+      expect(input).not.toBeChecked()
       // NOTE: Checkboxes should be clicked not 'changed'
       fireEvent.click(input)
       // NOTE: Can no longer change input of your todo when 'done'
@@ -54,7 +54,102 @@ describe("TodoApp", () => {
         selector: "input",
       })
       fireEvent.change(input, { target: { value: 0 } })
-      expect(input.value).toBe("0")
+      expect(input).toHaveValue("0")
+    })
+  })
+  describe("sorting", () => {
+    it("handles sorting by text", async () => {
+      const { getByLabelText, getAllByLabelText, getByTestId } = render(<App />)
+      const firstInputText = getByLabelText(lang.todoInputLabel, {
+        selector: "input",
+      })
+      // Create a new todo
+      fireEvent.keyDown(firstInputText, {
+        key: "Enter",
+        code: "Enter",
+      })
+      fireEvent.keyDown(firstInputText, {
+        key: "Enter",
+        code: "Enter",
+      })
+      fireEvent.change(
+        getAllByLabelText(lang.todoInputLabel, {
+          selector: "input",
+        })[0],
+        { target: { value: "Aaa" } }
+      )
+      fireEvent.change(
+        getAllByLabelText(lang.todoInputLabel, {
+          selector: "input",
+        })[1],
+        { target: { value: "Bbb" } }
+      )
+      fireEvent.change(
+        getAllByLabelText(lang.todoInputLabel, {
+          selector: "input",
+        })[2],
+        { target: { value: "Ccc" } }
+      )
+      fireEvent.change(getByTestId("sort-todos-by"), {
+        target: { value: "todoText" },
+      })
+      expect(
+        getAllByLabelText(lang.todoInputLabel, {
+          selector: "input",
+        })[0]
+      ).toHaveValue("Aaa")
+      fireEvent.change(getByTestId("sort-todos-direction"), {
+        target: { value: "ascending" },
+      })
+      expect(
+        getAllByLabelText(lang.todoInputLabel, {
+          selector: "input",
+        })[0]
+      ).toHaveValue("Bbb")
+      fireEvent.change(getByTestId("sort-todos-direction"), {
+        target: { value: "decending" },
+      })
+      expect(
+        getAllByLabelText(lang.todoInputLabel, {
+          selector: "input",
+        })[0]
+      ).toHaveValue("Aaa")
+    })
+    it("handles sorting by priority", async () => {
+      const {
+        getByLabelText,
+        getAllByLabelText,
+        getAllByTestId,
+        getByTestId,
+      } = render(<App />)
+      const firstInputText = getByLabelText(lang.todoInputLabel, {
+        selector: "input",
+      })
+      fireEvent.change(firstInputText, { target: { value: "first" } })
+      // Create a new todo
+      fireEvent.keyDown(firstInputText, {
+        key: "Enter",
+        code: "Enter",
+      })
+      fireEvent.change(getAllByTestId("todo-priority")[0], {
+        target: { value: 0 },
+      })
+      fireEvent.change(getAllByTestId("todo-priority")[1], {
+        target: { value: 2 },
+      })
+      expect(
+        getAllByLabelText(lang.todoInputLabel, {
+          selector: "input",
+        })[0]
+      ).toHaveValue("first")
+      fireEvent.change(getByTestId("sort-todos-direction"), {
+        target: { value: "ascending" },
+      })
+      expect(
+        getAllByLabelText(lang.todoInputLabel, {
+          selector: "input",
+        })[0]
+      ).toHaveValue("Create a new todo item")
     })
   })
 })

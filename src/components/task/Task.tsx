@@ -26,7 +26,7 @@ const Task = ({
     todoPriority: keyof typeof TODO_PRIORITIES
   ) => void
 }): React.ReactElement => (
-  <div className={styles.task} data-testid={id}>
+  <div className={styles.task} data-testid="todo-task">
     <label className={styles.visuallyHidden} htmlFor={`${id}-checkbox`}>
       {lang.checkboxInputLabel}
     </label>
@@ -63,6 +63,7 @@ const Task = ({
           {lang.todoPriorityLabel}
         </label>
         <select
+          data-testid="todo-priority"
           value={priority}
           className={styles.priority}
           onChange={(event): void => {
