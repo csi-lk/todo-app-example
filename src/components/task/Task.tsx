@@ -17,11 +17,14 @@ const Task = ({
   id: string
   isCompleted?: boolean
   todoText: string
-  priority: TODO_PRIORITIES
+  priority: keyof typeof TODO_PRIORITIES
   createEmptyTodo?: () => void
   updateTodoText?: (todoId: TODO_ID, text: string) => void
   toggleTaskCompletion: (todoId: TODO_ID) => void
-  setTaskPriority?: (todoId: TODO_ID, todoPriority: TODO_PRIORITIES) => void
+  setTaskPriority?: (
+    todoId: TODO_ID,
+    todoPriority: keyof typeof TODO_PRIORITIES
+  ) => void
 }): React.ReactElement => (
   <div className={styles.task} data-testid={id}>
     <label className={styles.visuallyHidden} htmlFor={`${id}-checkbox`}>
@@ -64,13 +67,13 @@ const Task = ({
           className={styles.priority}
           onChange={(event): void => {
             // NOTE: I don't know of a better way to do this...
-            const value = event.target.value as TODO_PRIORITIES
+            const value = +event.target.value as keyof typeof TODO_PRIORITIES
             setTaskPriority(id, value)
           }}
         >
-          {Object.values(TODO_PRIORITIES).map((todoPriority) => (
-            <option key={todoPriority} value={todoPriority}>
-              {todoPriority}
+          {Object.keys(TODO_PRIORITIES).map((todoPriority) => (
+            <option key={TODO_PRIORITIES[todoPriority]} value={todoPriority}>
+              {TODO_PRIORITIES[todoPriority]}
             </option>
           ))}
         </select>
@@ -78,7 +81,9 @@ const Task = ({
     ) : (
       <>
         <div className={styles.completedTodoText}>{todoText}</div>
-        <div className={styles.completedTodoPriority}>{priority}</div>
+        <div className={styles.completedTodoPriority}>
+          {TODO_PRIORITIES[priority]}
+        </div>
       </>
     )}
   </div>
