@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid"
 import type { TODO_STATE } from "./todo-state"
 import { TODO_ACTIONS } from "./todo-actions"
-import { lang, TODO, TODO_ID } from "../lib/constants"
+import { lang, TODO, TODO_ID, TODO_PRIORITIES } from "../lib/constants"
 
 type StoreAction =
   | { type: TODO_ACTIONS.CREATE_TODO; payload: { todo: TODO } }
@@ -12,6 +12,10 @@ type StoreAction =
       payload: { id: TODO_ID; todoText: string }
     }
   | { type: TODO_ACTIONS.TOGGLE_TODO_COMPLETION; payload: { id: TODO_ID } }
+  | {
+      type: TODO_ACTIONS.SET_TODO_PRIORITY
+      payload: { id: TODO_ID; priority: TODO_PRIORITIES }
+    }
 
 const todoReducer = (state: TODO_STATE, action: StoreAction): TODO_STATE => {
   switch (action.type) {
@@ -31,7 +35,7 @@ const todoReducer = (state: TODO_STATE, action: StoreAction): TODO_STATE => {
         todoItems: {
           ...state.todoItems,
           [nanoid()]: {
-            priority: "medium",
+            priority: TODO_PRIORITIES.MEDIUM,
             todoText: lang.newTodo,
           },
         },
@@ -73,6 +77,18 @@ const todoReducer = (state: TODO_STATE, action: StoreAction): TODO_STATE => {
           },
         },
         completedItems: newTodoItems,
+      }
+    }
+    case TODO_ACTIONS.SET_TODO_PRIORITY: {
+      return {
+        ...state,
+        todoItems: {
+          ...state.todoItems,
+          [action.payload.id]: {
+            ...state.todoItems[action.payload.id],
+            priority: action.payload.priority,
+          },
+        },
       }
     }
     default:
