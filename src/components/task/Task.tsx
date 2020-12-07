@@ -3,13 +3,15 @@ import React from "react"
 import styles from "./task.css"
 
 const Task = ({
+  id,
   isCompleted = false,
   todoText,
 }: {
+  id: string
   isCompleted: boolean
   todoText: string
 }): React.ReactElement => (
-  <div className={styles.task}>
+  <div className={styles.task} data-testid={id}>
     <label>
       <input
         type="checkbox"
