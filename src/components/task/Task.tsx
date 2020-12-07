@@ -53,6 +53,9 @@ const Task = ({
           }}
           disabled={updateTodoText === undefined}
         />
+        <label className={styles.visuallyHidden} htmlFor={id}>
+          {lang.todoPriorityLabel}
+        </label>
         <select
           value={priority}
           className={styles.priority}

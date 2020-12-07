@@ -3,7 +3,7 @@ import "@testing-library/jest-dom"
 import { render, fireEvent } from "@testing-library/react"
 import React from "react"
 import { initialState } from "./state/todo-state"
-import { lang } from "./lib/constants"
+import { TODO_PRIORITIES, lang } from "./lib/constants"
 
 import App from "./App"
 
@@ -45,6 +45,16 @@ describe("TodoApp", () => {
       expect(
         queryByLabelText(lang.todoInputLabel, { selector: "input" })
       ).not.toBeInTheDocument()
+    })
+  })
+  describe("priority", () => {
+    it("allows user to set priority of task", async () => {
+      const { getByLabelText } = render(<App />)
+      const input = getByLabelText(lang.todoPriorityLabel, {
+        selector: "input",
+      })
+      fireEvent.change(input, { target: { value: TODO_PRIORITIES.LOW } })
+      expect(input.value).toBe(TODO_PRIORITIES.LOW)
     })
   })
 })

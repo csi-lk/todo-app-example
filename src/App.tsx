@@ -14,6 +14,7 @@ const App = (): React.ReactElement => {
           key={id}
           id={id}
           todoText={state.todoItems[id].todoText}
+          priority={state.todoItems[id].priority}
           createEmptyTodo={(): void =>
             dispatch({ type: TODO_ACTIONS.CREATE_EMPTY_TODO })
           }
@@ -29,6 +30,12 @@ const App = (): React.ReactElement => {
               payload: { id: todoId },
             })
           }
+          setTaskPriority={(todoId, todoPriority): void =>
+            dispatch({
+              type: TODO_ACTIONS.SET_TODO_PRIORITY,
+              payload: { id: todoId, priority: todoPriority },
+            })
+          }
         />
       ))}
       {Object.keys(state.completedItems).map((id) => (
@@ -37,6 +44,7 @@ const App = (): React.ReactElement => {
           id={id}
           isCompleted
           todoText={state.completedItems[id].todoText}
+          priority={state.completedItems[id].priority}
           toggleTaskCompletion={(todoId): void =>
             dispatch({
               type: TODO_ACTIONS.TOGGLE_TODO_COMPLETION,

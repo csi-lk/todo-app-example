@@ -1,4 +1,8 @@
-export type TODO_PRIORITIES = "low" | "medium" | "high"
+export enum TODO_PRIORITIES {
+  LOW = "low",
+  MEDIUM = "medium",
+  HIGH = "high",
+}
 
 export type TODO_ID = string
 
@@ -14,4 +18,5 @@ export const lang = {
   exampleCompletedTodo: " This is an example completed todo",
   todoInputLabel: "Update todo:",
   checkboxInputLabel: "Toggle todo completion",
+  todoPriorityLabel: "Todo priority",
 }
