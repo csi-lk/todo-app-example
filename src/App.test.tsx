@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import "@testing-library/jest-dom"
-import { render } from "@testing-library/react"
+import { render, fireEvent } from "@testing-library/react"
 import React from "react"
 import { initialState } from "./state/todo-state"
 
@@ -10,5 +10,13 @@ describe("TodoApp", () => {
   it("renders with default todo", async () => {
     const { getByTestId } = render(<App />)
     expect(getByTestId(initialState.todoItems[0].id)).toBeInTheDocument()
+  })
+  it("renders new todo field when pressing enter", async () => {
+    const { getByLabelText, getAllByLabelText } = render(<App />)
+    fireEvent.keyDown(getByLabelText("New Todo", { selector: "input" }), {
+      key: "Enter",
+      code: "Enter",
+    })
+    expect(getAllByLabelText("New Todo")).toHaveLength(2)
   })
 })

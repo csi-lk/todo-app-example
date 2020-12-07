@@ -1,4 +1,4 @@
-import { TODO } from "../lib/constants"
+import { TODO, lang } from "../lib/constants"
 
 export type TODO_STATE = {
   todoItems: TODO[]
@@ -10,7 +10,7 @@ export const initialState = {
     {
       id: "V1StGXR8_Z5jdHi6B-myT",
       priority: "medium",
-      todoText: "This is an example todo",
+      todoText: lang.exampleTodo,
       isCompleted: false,
     },
   ],

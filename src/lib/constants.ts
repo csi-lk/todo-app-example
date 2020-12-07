@@ -7,3 +7,8 @@ export type TODO = {
   isCompleted: boolean
   completionDate?: Date
 }
+
+export const lang = {
+  newTodo: "Create a new todo item",
+  exampleTodo: "This is an example todo",
+}
