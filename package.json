@@ -64,6 +64,7 @@
   "dependencies": {
     "nanoid": "^3.1.20",
     "react": "^17.0.1",
+    "react-debounce-input": "^3.2.3",
     "react-dom": "^17.0.1"
   }
 }

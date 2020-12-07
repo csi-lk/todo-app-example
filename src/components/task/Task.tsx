@@ -1,4 +1,5 @@
 import React from "react"
+import { DebounceInput } from "react-debounce-input"
 import { TODO_ID, TODO_PRIORITIES, lang } from "../../lib/constants"
 
 import styles from "./task.css"
@@ -38,12 +39,14 @@ const Task = ({
         <label className={styles.visuallyHidden} htmlFor={id}>
           {lang.todoInputLabel}
         </label>
-        <input
+        <DebounceInput
           id={id}
           autoFocus
           type="text"
           className={styles.input}
           value={todoText}
+          minLength={2}
+          debounceTimeout={300}
           placeholder="Create a new todo item"
           onKeyDown={({ key }: { key: string }): void => {
             if (key === "Enter") createEmptyTodo()
@@ -66,7 +69,9 @@ const Task = ({
           }}
         >
           {Object.values(TODO_PRIORITIES).map((todoPriority) => (
-            <option value={todoPriority}>{todoPriority}</option>
+            <option key={todoPriority} value={todoPriority}>
+              {todoPriority}
+            </option>
           ))}
         </select>
       </>
