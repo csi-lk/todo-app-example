@@ -31,6 +31,7 @@ module.exports = {
         "@typescript-eslint/no-unused-vars": ["error"],
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
+        "unicorn/filename-case": "off",
       },
       extends: [
         "eslint:recommended",
