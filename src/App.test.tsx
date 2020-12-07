@@ -21,4 +21,10 @@ describe("TodoApp", () => {
     })
     expect(getAllByLabelText("New Todo")).toHaveLength(2)
   })
+  it("handles updating todo text", async () => {
+    const { getByLabelText } = render(<App />)
+    const input = getByLabelText("New Todo", { selector: "input" })
+    fireEvent.change(input, { target: { value: "a" } })
+    expect(input.value).toBe("a")
+  })
 })

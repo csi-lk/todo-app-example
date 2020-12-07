@@ -9,20 +9,23 @@ const App = (): React.ReactElement => {
   return (
     <div>
       <h1>Todo App</h1>
-      {Object.keys(state.todoItems).map((id) => {
-        const { todoText, isCompleted } = state.todoItems[id]
-        return (
-          <Task
-            key={id}
-            id={id}
-            todoText={todoText}
-            isCompleted={isCompleted}
-            createEmptyTodo={(): void =>
-              dispatch({ type: TODO_ACTIONS.CREATE_EMPTY_TODO })
-            }
-          />
-        )
-      })}
+      {Object.keys(state.todoItems).map((id) => (
+        <Task
+          key={id}
+          id={id}
+          todoText={state.todoItems[id].todoText}
+          isCompleted={state.todoItems[id].isCompleted}
+          createEmptyTodo={(): void =>
+            dispatch({ type: TODO_ACTIONS.CREATE_EMPTY_TODO })
+          }
+          updateTodoText={(todoId, todoText): void =>
+            dispatch({
+              type: TODO_ACTIONS.UPDATE_TODO_TEXT,
+              payload: { id: todoId, todoText },
+            })
+          }
+        />
+      ))}
     </div>
   )
 }
