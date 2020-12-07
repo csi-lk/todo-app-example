@@ -9,7 +9,9 @@ import App from "./App"
 describe("TodoApp", () => {
   it("renders with default todo", async () => {
     const { getByTestId } = render(<App />)
-    expect(getByTestId(initialState.todoItems[0].id)).toBeInTheDocument()
+    expect(
+      getByTestId(Object.keys(initialState.todoItems)[0])
+    ).toBeInTheDocument()
   })
   it("renders new todo field when pressing enter", async () => {
     const { getByLabelText, getAllByLabelText } = render(<App />)

@@ -1,17 +1,17 @@
-import { TODO, lang } from "../lib/constants"
+import { TODO, TODO_ID, lang } from "../lib/constants"
 
 export type TODO_STATE = {
-  todoItems: TODO[]
-  completedItems: TODO[]
+  todoItems: Record<TODO_ID, TODO>
+  completedItems: Record<TODO_ID, TODO>
 }
 
 export const initialState = {
-  todoItems: [
-    {
-      id: "V1StGXR8_Z5jdHi6B-myT",
+  todoItems: {
+    "V1StGXR8_Z5jdHi6B-myT": {
       priority: "medium",
       todoText: lang.exampleTodo,
       isCompleted: false,
     },
-  ],
+  },
+  completedItems: {},
 } as TODO_STATE
