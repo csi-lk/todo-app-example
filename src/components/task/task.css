@@ -10,12 +10,25 @@
 }
 
 .input,
-.completedTodo {
+.completedTodoText {
   border: 0;
   font-size: 18px;
   flex: 1 auto;
   border-bottom: 2px solid grey;
   padding: 5px 0;
+}
+
+.priority,
+.completedTodoPriority {
+  font-size: 16px;
+  border: 0;
+  border-bottom: 2px solid grey;
+  text-transform: lowercase;
+}
+
+.completedTodoPriority {
+  margin-top: 5px;
+  padding-right: 16px;
 }
 
 .visuallyHidden {

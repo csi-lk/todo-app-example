@@ -1,5 +1,5 @@
 import React from "react"
-import { TODO_ID, lang } from "../../lib/constants"
+import { TODO_ID, TODO_PRIORITIES, lang } from "../../lib/constants"
 
 import styles from "./task.css"
 
@@ -7,16 +7,20 @@ const Task = ({
   id,
   isCompleted = false,
   todoText,
+  priority,
   createEmptyTodo,
   updateTodoText,
   toggleTaskCompletion,
+  setTaskPriority,
 }: {
   id: string
   isCompleted?: boolean
   todoText: string
+  priority: TODO_PRIORITIES
   createEmptyTodo?: () => void
   updateTodoText?: (todoId: TODO_ID, text: string) => void
   toggleTaskCompletion: (todoId: TODO_ID) => void
+  setTaskPriority?: (todoId: TODO_ID, todoPriority: TODO_PRIORITIES) => void
 }): React.ReactElement => (
   <div className={styles.task} data-testid={id}>
     <label className={styles.visuallyHidden} htmlFor={`${id}-checkbox`}>
@@ -49,9 +53,25 @@ const Task = ({
           }}
           disabled={updateTodoText === undefined}
         />
+        <select
+          value={priority}
+          className={styles.priority}
+          onChange={(event): void => {
+            // NOTE: I don't know of a better way to do this...
+            const value = event.target.value as TODO_PRIORITIES
+            setTaskPriority(id, value)
+          }}
+        >
+          {Object.values(TODO_PRIORITIES).map((todoPriority) => (
+            <option value={todoPriority}>{todoPriority}</option>
+          ))}
+        </select>
       </>
     ) : (
-      <div className={styles.completedTodo}>{todoText}</div>
+      <>
+        <div className={styles.completedTodoText}>{todoText}</div>
+        <div className={styles.completedTodoPriority}>{priority}</div>
+      </>
     )}
   </div>
 )
