@@ -19,4 +19,6 @@ export const lang = {
   todoInputLabel: "Update todo:",
   checkboxInputLabel: "Toggle todo completion",
   todoPriorityLabel: "Todo priority",
+  completedTasks: "Completed Tasks",
+  total: "Total",
 }
