@@ -6,5 +6,12 @@ export type TODO_STATE = {
 }
 
 export const initialState = {
-  todoItems: [],
+  todoItems: [
+    {
+      id: "V1StGXR8_Z5jdHi6B-myT",
+      priority: "medium",
+      todoText: "This is an example todo",
+      isCompleted: false,
+    },
+  ],
 } as TODO_STATE
