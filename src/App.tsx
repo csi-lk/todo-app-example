@@ -2,15 +2,17 @@ import React, { useReducer } from "react"
 import todoReducer from "./state/todo-reducer"
 import { initialState } from "./state/todo-state"
 import { TODO_ACTIONS } from "./state/todo-actions"
-import { getCompletedTodos } from "./state/todo-selectors"
+import { getCompletedTodos, getOpenTodos } from "./state/todo-selectors"
 import Task from "./components/task/Task"
-import CompletedTasks from "./components/completed-tasks/CompletedTasks"
+import TaskCount from "./components/task-count/TaskCount"
+import Header from "./components/header/Header"
+import { lang } from "./lib/constants"
 
 const App = (): React.ReactElement => {
   const [state, dispatch] = useReducer(todoReducer, initialState)
   return (
     <div>
-      <h1>Todo App</h1>
+      <Header openTodos={getOpenTodos(state)} />
       {Object.keys(state.todoItems).map((id) => (
         <Task
           key={id}
@@ -40,7 +42,10 @@ const App = (): React.ReactElement => {
           }
         />
       ))}
-      <CompletedTasks amount={getCompletedTodos(state)} />
+      <TaskCount
+        amount={getCompletedTodos(state)}
+        heading={lang.completedTasks}
+      />
       {Object.keys(state.completedItems).map((id) => (
         <Task
           key={id}
