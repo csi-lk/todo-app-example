@@ -3,15 +3,19 @@ import React from "react"
 import styles from "./task.css"
 
 const Task = ({
-  checked = false,
+  isCompleted = false,
   todoText,
 }: {
-  checked: boolean
+  isCompleted: boolean
   todoText: string
 }): React.ReactElement => (
   <div className={styles.task}>
     <label>
-      <input type="checkbox" className={styles.checkbox} checked={checked} />
+      <input
+        type="checkbox"
+        className={styles.checkbox}
+        checked={isCompleted}
+      />
       <div className={styles.fakeCheckbox} />
     </label>
     <input
