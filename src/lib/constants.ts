@@ -1,13 +1,13 @@
-export enum TODO_PRIORITIES {
-  LOW = "low",
-  MEDIUM = "medium",
-  HIGH = "high",
+export const TODO_PRIORITIES = {
+  0: "low",
+  1: "medium",
+  2: "high",
 }
 
 export type TODO_ID = string
 
 export type TODO = {
-  priority: TODO_PRIORITIES
+  priority: keyof typeof TODO_PRIORITIES
   todoText: string
 }
 

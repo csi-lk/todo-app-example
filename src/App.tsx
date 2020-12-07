@@ -9,6 +9,7 @@ import {
 } from "./state/todo-selectors"
 import Task from "./components/task/Task"
 import TaskCount from "./components/task-count/TaskCount"
+import Sort from "./components/sort/Sort"
 import Header from "./components/header/Header"
 import { lang } from "./lib/constants"
 
@@ -17,6 +18,16 @@ const App = (): React.ReactElement => {
   return (
     <div>
       <Header openTodos={getOpenTodos(state)} />
+      <Sort
+        sortBy={state.sortBy}
+        sortDirection={state.sortDirection}
+        setSortBy={(sortGloballyBy): void =>
+          dispatch({
+            type: TODO_ACTIONS.SET_SORT_BY,
+            payload: { sortBy: sortGloballyBy },
+          })
+        }
+      />
       {getOpenTodoIdsSorted(state).map((id) => (
         <Task
           key={id}

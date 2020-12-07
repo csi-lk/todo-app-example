@@ -3,7 +3,7 @@ import "@testing-library/jest-dom"
 import { render, fireEvent } from "@testing-library/react"
 import React from "react"
 import { initialState } from "./state/todo-state"
-import { TODO_PRIORITIES, lang } from "./lib/constants"
+import { lang } from "./lib/constants"
 
 import App from "./App"
 
@@ -53,8 +53,8 @@ describe("TodoApp", () => {
       const input = getByLabelText(lang.todoPriorityLabel, {
         selector: "input",
       })
-      fireEvent.change(input, { target: { value: TODO_PRIORITIES.LOW } })
-      expect(input.value).toBe(TODO_PRIORITIES.LOW)
+      fireEvent.change(input, { target: { value: 0 } })
+      expect(input.value).toBe("0")
     })
   })
 })
