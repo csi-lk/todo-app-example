@@ -65,11 +65,11 @@ const App = (): React.ReactElement => {
           />
         ))}
       </div>
-      <TaskCount
-        amount={getCompletedTodos(state)}
-        heading={lang.completedTasks}
-      />
       <div data-testid="completed-todos">
+        <TaskCount
+          amount={getCompletedTodos(state)}
+          heading={lang.completedTasks}
+        />
         {Object.keys(state.completedItems).map((id) => (
           <Task
             key={id}
