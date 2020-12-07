@@ -3,6 +3,7 @@ import "@testing-library/jest-dom"
 import { render, fireEvent } from "@testing-library/react"
 import React from "react"
 import { initialState } from "./state/todo-state"
+import { lang } from "./lib/constants"
 
 import App from "./App"
 
@@ -15,16 +16,35 @@ describe("TodoApp", () => {
   })
   it("renders new todo field when pressing enter", async () => {
     const { getByLabelText, getAllByLabelText } = render(<App />)
-    fireEvent.keyDown(getByLabelText("New Todo", { selector: "input" }), {
-      key: "Enter",
-      code: "Enter",
-    })
-    expect(getAllByLabelText("New Todo")).toHaveLength(2)
+    fireEvent.keyDown(
+      getByLabelText(lang.todoInputLabel, { selector: "input" }),
+      {
+        key: "Enter",
+        code: "Enter",
+      }
+    )
+    expect(getAllByLabelText(lang.todoInputLabel)).toHaveLength(2)
   })
   it("handles updating todo text", async () => {
     const { getByLabelText } = render(<App />)
-    const input = getByLabelText("New Todo", { selector: "input" })
+    const input = getByLabelText(lang.todoInputLabel, { selector: "input" })
     fireEvent.change(input, { target: { value: "a" } })
     expect(input.value).toBe("a")
+  })
+
+  describe("completion", () => {
+    it("allows user to complete todo", async () => {
+      const { getAllByLabelText, queryByLabelText } = render(<App />)
+      const input = getAllByLabelText(lang.checkboxInputLabel, {
+        selector: "input",
+      })[0]
+      expect(input.checked).toBe(false)
+      // NOTE: Checkboxes should be clicked not 'changed'
+      fireEvent.click(input)
+      // NOTE: Can no longer change input of your todo when 'done'
+      expect(
+        queryByLabelText(lang.todoInputLabel, { selector: "input" })
+      ).not.toBeInTheDocument()
+    })
   })
 })

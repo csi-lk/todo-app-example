@@ -14,7 +14,6 @@ const App = (): React.ReactElement => {
           key={id}
           id={id}
           todoText={state.todoItems[id].todoText}
-          isCompleted={state.todoItems[id].isCompleted}
           createEmptyTodo={(): void =>
             dispatch({ type: TODO_ACTIONS.CREATE_EMPTY_TODO })
           }
@@ -22,6 +21,26 @@ const App = (): React.ReactElement => {
             dispatch({
               type: TODO_ACTIONS.UPDATE_TODO_TEXT,
               payload: { id: todoId, todoText },
+            })
+          }
+          toggleTaskCompletion={(todoId): void =>
+            dispatch({
+              type: TODO_ACTIONS.TOGGLE_TODO_COMPLETION,
+              payload: { id: todoId },
+            })
+          }
+        />
+      ))}
+      {Object.keys(state.completedItems).map((id) => (
+        <Task
+          key={id}
+          id={id}
+          isCompleted
+          todoText={state.completedItems[id].todoText}
+          toggleTaskCompletion={(todoId): void =>
+            dispatch({
+              type: TODO_ACTIONS.TOGGLE_TODO_COMPLETION,
+              payload: { id: todoId },
             })
           }
         />

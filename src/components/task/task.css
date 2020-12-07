@@ -3,18 +3,14 @@
   display: flex;
 }
 
-.task:hover {
-  color: grey;
-  cursor: pointer;
-}
-
 .checkbox {
   cursor: pointer;
   transform: scale(2, 2);
   margin: 10px 15px 0 0;
 }
 
-.input {
+.input,
+.completedTodo {
   border: 0;
   font-size: 18px;
   flex: 1 auto;
