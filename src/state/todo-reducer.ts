@@ -14,7 +14,15 @@ type StoreAction =
   | { type: TODO_ACTIONS.TOGGLE_TODO_COMPLETION; payload: { id: TODO_ID } }
   | {
       type: TODO_ACTIONS.SET_TODO_PRIORITY
-      payload: { id: TODO_ID; priority: TODO_PRIORITIES }
+      payload: { id: TODO_ID; priority: keyof typeof TODO_PRIORITIES }
+    }
+  | {
+      type: TODO_ACTIONS.SET_SORT_BY
+      payload: { sortBy: keyof TODO }
+    }
+  | {
+      type: TODO_ACTIONS.SET_SORT_DIRECTION
+      payload: { sortDirection: "ascending" | "decending" }
     }
 
 const todoReducer = (state: TODO_STATE, action: StoreAction): TODO_STATE => {
@@ -35,7 +43,7 @@ const todoReducer = (state: TODO_STATE, action: StoreAction): TODO_STATE => {
         todoItems: {
           ...state.todoItems,
           [nanoid()]: {
-            priority: TODO_PRIORITIES.MEDIUM,
+            priority: 1,
             todoText: lang.newTodo,
           },
         },
@@ -91,6 +99,16 @@ const todoReducer = (state: TODO_STATE, action: StoreAction): TODO_STATE => {
         },
       }
     }
+    case TODO_ACTIONS.SET_SORT_BY:
+      return {
+        ...state,
+        sortBy: action.payload.sortBy,
+      }
+    case TODO_ACTIONS.SET_SORT_DIRECTION:
+      return {
+        ...state,
+        sortDirection: action.payload.sortDirection,
+      }
     default:
       return {
         ...state,

@@ -12,13 +12,13 @@ export const initialState = {
   sortDirection: "decending",
   todoItems: {
     V1StGXR8Z5jdHi6BmyT: {
-      priority: "medium",
+      priority: 1,
       todoText: lang.exampleTodo,
     },
   },
   completedItems: {
     b1tXtSS28vJTVtZ8tn3de: {
-      priority: "medium",
+      priority: 1,
       todoText: lang.exampleCompletedTodo,
     },
   },
