@@ -8,7 +8,7 @@ import webpack from "webpack"
 
 const commonConfig = {
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".css"],
   },
   context: path.resolve(__dirname, "./src"),
   module: {

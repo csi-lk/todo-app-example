@@ -10,5 +10,6 @@
     "lib": ["es5", "es6", "dom"],
     "moduleResolution": "node"
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*"],
+  "plugins": [{ "name": "typescript-plugin-css-modules" }]
 }
