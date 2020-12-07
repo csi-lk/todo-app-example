@@ -2,7 +2,9 @@ import React, { useReducer } from "react"
 import todoReducer from "./state/todo-reducer"
 import { initialState } from "./state/todo-state"
 import { TODO_ACTIONS } from "./state/todo-actions"
+import { getCompletedTodos } from "./state/todo-selectors"
 import Task from "./components/task/Task"
+import CompletedTasks from "./components/completed-tasks/CompletedTasks"
 
 const App = (): React.ReactElement => {
   const [state, dispatch] = useReducer(todoReducer, initialState)
@@ -38,6 +40,7 @@ const App = (): React.ReactElement => {
           }
         />
       ))}
+      <CompletedTasks amount={getCompletedTodos(state)} />
       {Object.keys(state.completedItems).map((id) => (
         <Task
           key={id}
