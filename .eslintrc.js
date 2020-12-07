@@ -32,6 +32,8 @@ module.exports = {
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
         "unicorn/filename-case": "off",
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": "error",
       },
       extends: [
         "eslint:recommended",
